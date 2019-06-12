@@ -26,9 +26,82 @@ class RPSUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testBotVsBot() {
+        let app = XCUIApplication()
+        app.buttons["BOT Vs BOT"].tap()
+        let changeModeButton = app.buttons["CHANGE MODE"]
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: changeModeButton, handler: nil)
+        waitForExpectations(timeout: 30) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
+        changeModeButton.tap()
+    }
+    
+    func testHumanVsBot_TimeOutLost() {
+        
+        let app = XCUIApplication()
+        app.buttons["PLAYER Vs BOT"].tap()
+        let changeModeButton = app.buttons["CHANGE MODE"]
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: changeModeButton, handler: nil)
+        waitForExpectations(timeout: 30) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
+        changeModeButton.tap()
+        
+    }
+    
+    func testPlayAGaincheck_PlayerVsBot(){
+        
+        let app = XCUIApplication()
+        app.buttons["PLAYER Vs BOT"].tap()
+        
+        let playAgainButton = app.buttons["PLAY AGAIN"]
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: playAgainButton, handler: nil)
+        waitForExpectations(timeout: 30) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
+        playAgainButton.tap()
+        
+        
+        let changeModeButton = app.buttons["CHANGE MODE"]
+        expectation(for: exists, evaluatedWith: changeModeButton, handler: nil)
+        waitForExpectations(timeout: 30) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
+        changeModeButton.tap()
+    }
+    
+    func testPlayGameCheckbuttonTap() {
+        
+        let app = XCUIApplication()
+        app.buttons["PLAYER Vs BOT"].tap()
+        sleep(2)
+        app.buttons["rockbtn"].tap()
+        sleep(2)
+        app.buttons["paperbtn"].tap()
+        sleep(2)
+        //press scissors button finally
+        let scissorsBtn = app.buttons["scissorsbtn"]
+        scissorsBtn.tap()
+        
+        //these labels can't be empty
+        let labelElementOne = app.staticTexts["playerOneScoreId"]
+        let labelElementTwo = app.staticTexts["playerTwoScoreId"]
+        XCTAssertNotEqual(labelElementOne.label, "")
+        XCTAssertNotEqual(labelElementTwo.label, "")
+        
+        //navigate back to home screen
+        let changeModeButton = app.buttons["CHANGE MODE"]
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: changeModeButton, handler: nil)
+        waitForExpectations(timeout: 30) { (error) in
+            print(error?.localizedDescription ?? "")
+        }
+        changeModeButton.tap()
+        
     }
 
 }

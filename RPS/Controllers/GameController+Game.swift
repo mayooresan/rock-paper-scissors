@@ -134,26 +134,29 @@ extension GameController {
     }
     
     func startTimer() {
-        timerCount = 5
-        self.timerView.isHidden = false
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (currTimer) in
-            if self.timerCount >= 0 {
-                self.timerLabel.text = "\(self.timerCount)"
-                self.timerCount -= 1
-            } else {
-                print("timer stopped")
-                self.timerView.isHidden = true
-                self.timer?.invalidate()
-                if let gameEngine = self.gameEngine {
-                    gameEngine.playerOneScored()
+        if let gameEngine = self.gameEngine {
+            timerCount = gameEngine.waitingTime
+            self.timerView.isHidden = false
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (currTimer) in
+                if self.timerCount >= 0 {
+                    self.timerLabel.text = "\(self.timerCount)"
+                    self.timerCount -= 1
+                } else {
+                    print("timer stopped")
+                    self.timerView.isHidden = true
+                    self.timer?.invalidate()
+                    if let gameEngine = self.gameEngine {
+                        gameEngine.playerOneScored()
+                    }
+                    
+                    self.updateGameScore()
+                    self.timerCount = gameEngine.waitingTime
+                    self.startTimer()
                 }
                 
-                self.updateGameScore()
-                self.timerCount = 5
-                self.startTimer()
+                self.checkGameStatus()
             }
-            
-            self.checkGameStatus()
         }
+        
     }
 }

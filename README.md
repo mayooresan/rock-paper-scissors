@@ -4,6 +4,8 @@ This is an iOS Application developed to digitise the Rock Paper Scissors game on
 ## Download
 Now [available in appstore](https://apps.apple.com/app/id1467890259) for iOS powered devices for ***free*** (No ads or hidden in app purchases)
 
+[![Avilable for download](https://developer.apple.com/app-store/marketing/guidelines/images/badge-example-preferred_2x.png)](https://apps.apple.com/app/id1467890259)
+
 ## Game rules
 Each game can be played between a computer (aka BOT) and player or between computer. When the game is being played between computers, users can sit back relax and witness the BOTs battle. 
 

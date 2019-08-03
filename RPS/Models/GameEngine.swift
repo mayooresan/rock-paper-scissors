@@ -27,15 +27,16 @@ enum GameVictoryState {
 }
 
 class GameEngine {
-    var playerOne = Player(playerScore: 0, playerType: .playerOne)
-    var playerTwo = Player(playerScore: 0, playerType: .playerTwo)
+    //number of seconds before user has to make a choice
+    let waitingTime = 5
+    //minimum number of rounds per game
+    let numberOfRounds = 3
+    
+    let playerOne = Player(playerScore: 0, playerType: .playerOne)
+    let playerTwo = Player(playerScore: 0, playerType: .playerTwo)
     
     var gameType: GameType = .HumanVsBot
     var resultString: String = ""
-    //number of seconds before user has to make a choice
-    var waitingTime = 5
-    //minimum number of rounds per game
-    var numberOfRounds = 3
     
     init(scoreOne: Int, scoreTwo: Int, gameType: GameType) {
         self.playerOne.playerScore = scoreOne

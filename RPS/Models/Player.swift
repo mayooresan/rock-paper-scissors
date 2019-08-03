@@ -27,11 +27,12 @@ class Player {
             return currentScore
         }
     }
-    var playerType: Players?
+    
+    let playerType: Players
     
     init(playerScore: Int = 0, playerType: Players) {
         self.currentScore = playerScore
-        self.playerScore = playerScore
         self.playerType = playerType
+        self.playerScore = playerScore
     }
 }
